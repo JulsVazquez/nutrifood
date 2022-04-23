@@ -39,10 +39,10 @@
                         <!-- Card content -->
                         <div class="card-body">
                            <!-- Title -->
-                           <a href="#" class="black-text">{{recipe.title}}</a>
+                           <a href="{{recipe.get_url}}" class="black-text">{{recipe.title}}</a>
                            <!-- Text -->
                            <p class="card-title text-muted font-small mt-3 mb-2">{{recipe.description|safe|slice:":150"}}</p>
-                           <a type="button" class="btn btn-flat text-primary p-0 mx-0" href="#">Read more<i class="fa fa-angle-right ml-2"></i></a>
+                           <a type="button" class="btn btn-flat text-primary p-0 mx-0" href="{{recipe.get_link}}">Read more<i class="fa fa-angle-right ml-2"></i></a>
                         </div>
                      </div>
                      <!-- Card -->
