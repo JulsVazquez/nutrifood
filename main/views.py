@@ -39,12 +39,12 @@ def search(request):
     elif request.GET.get("dessert"):
         results = queryset.filter(Q(topic__title__icontains="dessert"))
         topic = "dessert"
-    elif request.GET.get("easy"):
-        results = queryset.filter(Q(topic__title__icontains="easy"))
-        topic = "easy"
-    elif request.GET.get("hard"):
-        results = queryset.filter(Q(topic__title__icontains="hard"))
-        topic = "hard"
+    elif request.GET.get("vegan"):
+        results = queryset.filter(Q(topic__title__icontains="vegan"))
+        topic = "vegan"
+    elif request.GET.get("vegetarian"):
+        results = queryset.filter(Q(topic__title__icontains="vegetarian"))
+        topic = "vegetarian"
 
     total = results.count()
 
