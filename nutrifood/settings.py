@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
 
     'main',
+
+    'displayapi',
 ]
 
 SITE_ID = 1
