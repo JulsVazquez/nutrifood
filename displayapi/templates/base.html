@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    {% load static %}
+  
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>{{title}}</title>
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
+        <!-- Bootstrap core CSS -->
+        <link
+          rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+          integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+          crossorigin="anonymous"
+        />
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/mdb.min.css' %}" />
+        <link rel="stylesheet" href="{% static 'css/style.min.css' %}" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+    </head>
+    {% include "navbar.html" %}
+    <body>
+        <div class="view jarallax" data-jarallax='{"speed": 0.2}'
+         style="background-image: url('https://wallpaperaccess.com/full/1737971.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center ">
+         <div class="mask rgba-indigo-light">
+            <div class="container h-100 d-flex justify-content-center align-items-center">
+               <div class="row">
+                {% block content %}
+                {% endblock %}
+               </div>
+            </div>
+         </div>
+      </div>
+        
+    <footer class="page-footer text-center text-md-left unique-color-dark pt-0">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+           <div class="container-fluid">
+              © 2022 Copyright: <a href="#" target="_blank"> DesignHub </a>
+           </div>
+        </div>
+        <!-- Copyright -->
+     </footer>
+    </body>
+</html>
