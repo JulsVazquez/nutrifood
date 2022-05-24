@@ -7,20 +7,20 @@
       line-height: 1.7rem;
     }
     .circle {
-      background-color: #e6ffe6;
+      background-color: #dfe7ba;
       border-radius: 50px;
       padding: 10px;
-    }
-    .circle:hover {
-      background-color: #99ff99;
     }
     .rectangle {
-      background-color: #ffb3b3;
+      background-color: #ffab64;
       border-radius: 50px;
       padding: 10px;
     }
-    .rectangle:hover {
-      background-color: #ffe6e6;
+    .center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 50%;
     }
   </style>
 
@@ -28,8 +28,8 @@
     <!-- Main Navigation -->
     <header>
       <section>
-        <div class="" style="max-height: 600px">
-          <img src="{{recipe.image}}" style="width: 100%" />
+        <div class="" style="max-height: 150px">
+          <img src="{{'https://wallpaperaccess.com/full/1737971.jpg'}}" style="width: 159%" />
         </div>
       </section>
     </header>
@@ -43,11 +43,12 @@
           <div class="col-md-12 px-lg-5">
             <!-- Card -->
             <div class="card pb-5 mx-md-3">
-              <h1>#{{recipe.topic.title}}</h1>
+              <h1 style="color: #ffab64">#{{recipe.topic.title}}</h1>
 
               <div class="card-body">
                 <div class="container">
                   <!-- Section heading -->
+                  <img src="{{recipe.image}}" style="width: 25%" class="center" />
                   <h1 class="text-center h1 pt-4 mb-3">
                     <strong>{{recipe.title}}</strong>
                   </h1>
@@ -96,13 +97,13 @@
                       <p>{{recipe.description|safe}}</p>
                       <div class="row">
                         <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
-                          <div class="jumbotron" style="background-color: #f5f5f0">
+                          <div class="jumbotron" style="background-color: #dfe7ba">
                             <h1>Ingredients:</h1>
                             <p>{{recipe.ingredients|safe}}</p>
                           </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
-                          <div class="jumbotron" style="background-color: #f5f5f0">
+                          <div class="jumbotron" style="background-color: #dfe7ba">
                             <h1>Directions:</h1>
                             <p>{{recipe.directions|safe}}</p>
                           </div>
@@ -128,6 +129,9 @@
                             <i class="fab fa-google-plus-g left"></i> Google +
                           </button>
                         </div>
+                        <div class="text-center mt-5 center">
+                          <a class="btn" style="background-color: #ffab64" href="{% url 'home' %}">Back Home</a>
+                        </div>
                         <!-- Grid column -->
                       </div>
                       <!-- Grid row -->
@@ -145,9 +149,6 @@
           <!-- Grid column -->
         </div>
         <!-- Grid row -->
-        <div class="text-center mt-5">
-          <a href="{% url 'home' %}">Back Home</a>
-        </div>
       </div>
     </main>
     <!-- Main Layout -->
