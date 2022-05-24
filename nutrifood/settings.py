@@ -44,11 +44,17 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
+    
+    "crispy_forms",
+    "crispy_bootstrap5",
+
     'main',
+
+    'displayapi',
 ]
 
 SITE_ID = 1
-
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         # For each OAuth based provider, either add a ``SocialApp``
