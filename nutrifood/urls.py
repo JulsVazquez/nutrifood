@@ -21,4 +21,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('main.urls')),
     path('esp/', include('displayapi.urls')),
+    path('users/', include('users.urls')),
 ]

@@ -10,7 +10,7 @@ from .forms import IndexForm
 
 class IndexFormView(FormView):
     form_class = IndexForm
-    template_name = "index.html"
+    template_name = "displayapi/index.html"
 
     def post(self, request):
         form = IndexForm(data = request.POST)

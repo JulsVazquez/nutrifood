@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'main',
 
     'displayapi',
+    'users',
 ]
 
 SITE_ID = 1
@@ -94,7 +95,9 @@ TEMPLATES = [
         },
     },
 ]
-
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm'
+}
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -104,6 +107,7 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
+
 WSGI_APPLICATION = 'nutrifood.wsgi.application'
 
 
@@ -112,16 +116,11 @@ WSGI_APPLICATION = 'nutrifood.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postnutrifoodb',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase', # This is where you put the name of the db file. 
+                 # If one doesn't exist, it will be created at migration time.
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -139,6 +138,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ACCOUNT_EMAIL_VERIFICATION = "none"
 
 
 # Internationalization
