@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+import os.path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     'main',
 
     'displayapi',
+    'users',
 ]
 
 SITE_ID = 1
@@ -94,7 +96,9 @@ TEMPLATES = [
         },
     },
 ]
-
+ACCOUNT_FORMS = {
+    'signup': 'users.forms.CustomSignupForm'
+}
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -103,6 +107,7 @@ AUTHENTICATION_BACKENDS = [
     'allauth.account.auth_backends.AuthenticationBackend',
 
 ]
+
 
 WSGI_APPLICATION = 'nutrifood.wsgi.application'
 
@@ -120,8 +125,6 @@ DATABASES = {
         'PORT': '',
     }
 }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
@@ -139,6 +142,12 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+LOGIN_REDIRECT_URL = '/'
+ACCOUNT_EMAIL_REQUIRED = False
+ACCOUNT_EMAIL_VERIFICATION = "none"
+ACCOUNT_LOGOUT_ON_GET = True
 
 
 # Internationalization
@@ -156,9 +165,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
+
+STATIC_ROOT = ''
+
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = ( os.path.join('static'), )
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Account Adapter for redirect after login
+ACCOUNT_ADAPTER = 'users.adapter.AccountAdapter'
+#Storing session in db instead of in volatile memory
+SESSION_ENGINE = "django.contrib.sessions.backends.cached_db"

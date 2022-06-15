@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% include 'head.html' %}
+{% extends "main/base.html" %}
   <style>
     li {
       font-size: 0.95rem;
@@ -23,7 +21,7 @@
       width: 50%;
     }
   </style>
-
+  {% block content %}
   <body>
     <!-- Main Navigation -->
     <header>
@@ -184,4 +182,4 @@
       });
     </script>
   </body>
-</html>
+  {% endblock %}

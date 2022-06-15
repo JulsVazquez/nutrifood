@@ -10,7 +10,7 @@ from .forms import IndexForm
 
 class IndexFormView(FormView):
     form_class = IndexForm
-    template_name = "index.html"
+    template_name = "displayapi/index.html"
 
     def post(self, request):
         form = IndexForm(data = request.POST)
@@ -18,9 +18,8 @@ class IndexFormView(FormView):
             ingredient = form.cleaned_data["ingredient"]
             response = self.get_request(ingredient)
             form = IndexForm()
-            print(response)
-            return render(request, 'index.html', {'response' : response, 'ingredient': ingredient.upper, 'form':form})
-        return render(request, 'index.html')
+            return render(request, 'displayapi/index.html', {'response' : response, 'ingredient': ingredient.upper, 'form':form})
+        return render(request, 'displayapi/index.html')
         
     def get_request(self, ingredient):
         response = requests.get(

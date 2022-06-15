@@ -11,7 +11,7 @@ def home(request):
         "total_recipes": total_recipes,
     }
 
-    return render(request, "home.html", context)
+    return render(request, "main/home.html", context)
 
 
 def search(request):
@@ -65,7 +65,7 @@ def search(request):
         "query": query,
         "results": results,
     }
-    return render(request, "search.html", context)
+    return render(request, "main/search.html", context)
 
 
 def detail(request, slug):
@@ -73,4 +73,4 @@ def detail(request, slug):
     context = {
         "recipe": recipe,
     }
-    return render(request, "detail.html", context)
+    return render(request, "main/detail.html", context)
