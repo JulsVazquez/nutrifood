@@ -7,8 +7,8 @@
          style="background-image: url('https://wallpaperaccess.com/full/1737971.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center ">
     Profile
     <br/>
-    {{ user.height }}
-    {{ user.weight }}
+    {{ request.user }}
+    {{ request.user.weight }}
 </div>
 
 {% endblock %}

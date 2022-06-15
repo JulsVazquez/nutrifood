@@ -13,10 +13,10 @@ padding: 0;
 
 a.navbar-brand {
 float: left;
-height: 50px;
-padding: 15px 15px;
+height: 0px;
+padding: 10px 10px;
 font-size: 25px;
-line-height: 20px;
+line-height: 0px;
 text-decoration: none;
 color: orangered;
 font-family: 'Roboto', sans-serif;
@@ -140,10 +140,10 @@ animation-name: fadeInUp;
 }
 
 </style>
+{% load static %}
 <nav class="main-navigation">
-    <div class="navbar-header animated fadeInUp">
-        <a class="navbar-brand" href="#">NUTRI FOOD 🥕</a>
-    </div>
+        <a class="navbar-brand animated fadeInUp" href="/"> <img alt="NUTRI FOOD 🥕" src="{% static 'img/nutrifoodlogo.png' %}"
+            width="8%" height="auto" /></a>
     <ul class="nav-list">
         <li class="nav-list-item">
             <a class="btn "
@@ -151,17 +151,30 @@ animation-name: fadeInUp;
                href="esp/"
                role="button">My favorite ingredient</a>
         </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-list-item">
+            <a class="btn "
+               style="background-color: #ffab64;"
+               href="/logout/"
+               role="button">Log out</a>
+        </li>
+        <li class="nav-list-item">
+        <a class="material-icons " style = "color: #dfe7ba; font-size: 50px " href = "/users/profile/">account_circle</a>
+        </li>
+            
+        {% else %}
         <li class="nav-list-item">
             <a class="btn  "
                style="background-color: #ffab64;"
-               href=" /accounts/login/"
+               href=" /login/"
                role="button">Sign in</a>
         </li>
         <li class="nav-list-item">
             <a class="btn "
                style="background-color: #ffab64;"
-               href="/accounts/signup/"
+               href="/signup/"
                role="button">Sign up</a>
         </li>
+        {% endif %}
     </ul>
 </nav>
