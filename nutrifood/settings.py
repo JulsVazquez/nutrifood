@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-^al@!4*-o@p#@)!1*s0k79r&80h64!^!r@@dnoljhml#4l5mw7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
 
     
     "crispy_forms",
@@ -53,21 +52,12 @@ INSTALLED_APPS = [
 
     'displayapi',
     'users',
+    'diets',
 ]
 
 SITE_ID = 1
 CRISPY_TEMPLATE_PACK = "bootstrap5"
-SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        # For each OAuth based provider, either add a ``SocialApp``
-        # (``socialaccount`` app) containing the required client
-        # credentials, or list them here:
-        'APP': {
-            'client_id': '342485634640-84kj068kcstref2nb2eka4fme5h8ji4k.apps.googleusercontent.com',
-            'secret': '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',
-        }
-    }
-}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -84,7 +74,7 @@ ROOT_URLCONF = 'nutrifood.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "templates"],
+        'DIRS': [BASE_DIR / "templates",BASE_DIR/"templates/allauth/accounts"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -117,12 +107,9 @@ WSGI_APPLICATION = 'nutrifood.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postnutrifoodb',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'mydatabase', # This is where you put the name of the db file. 
+                 # If one doesn't exist, it will be created at migration time.
     }
 }
 # Password validation

@@ -24,3 +24,4 @@ urlpatterns = [
     path('users/', include('users.urls')),
     path('diets/', include('diets.urls')),
 ]
+
