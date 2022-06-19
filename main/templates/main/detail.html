@@ -41,12 +41,12 @@
           <div class="col-md-12 px-lg-5">
             <!-- Card -->
             <div class="card pb-5 mx-md-3">
-              <h1 style="color: #ffab64">#{{recipe.topic.title}}</h1>
+              <h1 style="color: #ffab64">#{{response.title}}</h1>
 
               <div class="card-body">
                 <div class="container">
                   <!-- Section heading -->
-                  <img src="{{recipe.image}}" style="width: 25%" class="center" />
+                  <img src="{{response.image}}" style="width: 25%" class="center" />
                   <h1 class="text-center h1 pt-4 mb-3">
                     <strong>{{recipe.title}}</strong>
                   </h1>
@@ -54,22 +54,18 @@
                     <div class="col-md-12 col-xl-12 d-flex justify-content-center">
                       <div class="d-inline">
                         <label for="calories">Calories</label>
-                        <span id="calories" class="border circle">{{recipe.calories}} Kcal</span>
+                        <span id="calories" class="border circle">{{response.calories}} cal</span>
                       </div>
 
-                      <div class="d-inline">
-                        <label for="carbs" class="mx-2">Carbs</label>
-                        <span id="carbs" class="border circle">{{recipe.carbs}} g</span>
-                      </div>
 
                       <div class="d-inline">
                         <label for="fat" class="mx-2">Fat</label>
-                        <span id="fat" class="border circle">{{recipe.fat}} g</span>
+                        <span id="fat" class="border circle">{{response.fat}} </span>
                       </div>
 
                       <div class="d-inline">
                         <label for="protein" class="mx-2">Protein</label>
-                        <span id="protein" class="border circle">{{recipe.protein}} g</span>
+                        <span id="protein" class="border circle">{{response.protein}} </span>
                       </div>
                     </div>
                   </div>
@@ -78,11 +74,11 @@
                     <div class="col-md-12 col-xl-12 d-flex justify-content-center">
                       <div class="d-inline">
                         <label for="calories">Prep:</label>
-                        <span id="calories" class="border rectangle">{{recipe.time}} mins</span>
+                        <span id="calories" class="border rectangle">{{response.readyInMinutes}} mins</span>
                       </div>
                       <div class="d-inline">
                         <label for="carbs" class="mx-2">Servings:</label>
-                        <span id="carbs" class="border rectangle">{{recipe.servings}}</span>
+                        <span id="carbs" class="border rectangle">{{response.servings}}</span>
                       </div>
                     </div>
                   </div>
@@ -97,13 +93,25 @@
                         <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
                           <div class="jumbotron" style="background-color: #dfe7ba">
                             <h1>Ingredients:</h1>
-                            <p>{{recipe.ingredients|safe}}</p>
+                            <ul class="list-group">
+                              {% for ingredient in response.extendedIngredients %}
+                            
+                              <li class="list-group-item d-flex justify-content-between align-items-center">{{ ingredient.original }}</li>
+                              <div class="image-parent">
+                                <img src="https://spoonacular.com/cdn/ingredients_100x100/{{ ingredient.image }}" style="width: 15%; height:auto">
+                              </div>
+                              {% endfor %}
+                            </ul>
                           </div>
                         </div>
                         <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
                           <div class="jumbotron" style="background-color: #dfe7ba">
                             <h1>Directions:</h1>
-                            <p>{{recipe.directions|safe}}</p>
+                            <ol class="list-group list-group-numbered">
+                              {% for step in response.analyzedInstructions.0.steps %}
+                              <li class="list-group-item">{{ step.step }}</li>
+                              {% endfor %}
+                            </ol>
                           </div>
                         </div>
                       </div>
@@ -159,7 +167,6 @@
       <!-- Copyright -->
     </footer>
     <!-- SCRIPTS -->
-    {% include 'scripts.html' %}
     <script>
       new WOW().init();
 
