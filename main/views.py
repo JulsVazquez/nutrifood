@@ -3,9 +3,16 @@ from django.shortcuts import render, get_object_or_404
 from .models import Recipe
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import HttpResponseServerError
 
 import requests
 
+api_keys = ["41fec56909474683a86fdcfa31c0f9d7",
+            "717a16dc5e4f4d50b4a5ad4eaf0ca926",
+            "62620d0fc94a4c5ba408be5e84fc9a8a",
+            "32ae301b8fe4468a9b2629ee0cacd81f",
+            "b08783f666474784987be694525efb82"
+            ]
 
 def home(request):
     total_recipes = Recipe.objects.all().count()
@@ -46,18 +53,27 @@ def search(request):
     response = ""
     if search and tag:
         print("s and t")
-        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6&query={search}&tag={tag}'
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=APIKEY&number=6&query={search}&tag={tag}'
     elif search and not tag:
         print("s")
-        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6&query={search}'
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=APIKEY&number=6&query={search}'
     elif not search and tag:
         print("t")
-        url = f'https://api.spoonacular.com/recipes/random?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6&tag={tag}'
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=APIKEY&number=6&tag={tag}'
     else:
         print("ninguno")
-        url = f'https://api.spoonacular.com/recipes/random?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6'
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=APIKEY&number=6'
     print(url)
-    response = session.get(url=url).json()
+    for ak in api_keys:
+        url = url.replace("APIKEY", ak)
+        response = session.get(url=url)
+        if response.status_code == 200:
+            break 
+        else:
+            url = url.replace(ak,"APIKEY")
+    if response.status_code != 200:
+        return HttpResponseServerError()
+    response = response.json()
     if 'recipes' in response:
         total = len(response['recipes'])
         response = response['recipes']
