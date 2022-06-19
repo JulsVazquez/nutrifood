@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
 import requests
 
+
 def home(request):
     total_recipes = Recipe.objects.all().count()
     context = {
@@ -20,7 +21,8 @@ def search(request):
     tag = ""
     search = ""
     session = requests.Session()
-    session.headers.update({'Content-Type' : 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'})
+    session.headers.update({'Content-Type': 'application/json',
+                           'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'})
     if "search" in request.GET:
         search = request.GET.get("search")
 
@@ -44,18 +46,18 @@ def search(request):
     response = ""
     if search and tag:
         print("s and t")
-        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4&query={search}&tag={tag}'
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4&query={search}&tag={tag}'
     elif search and not tag:
         print("s")
-        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4&query={search}'
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4&query={search}'
     elif not search and tag:
         print("t")
-        url = f'https://api.spoonacular.com/recipes/random?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4&tag={tag}'
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4&tag={tag}'
     else:
         print("ninguno")
-        url = f'https://api.spoonacular.com/recipes/random?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4'
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4'
     print(url)
-    response =  session.get(url=url).json()
+    response = session.get(url=url).json()
     if 'recipes' in response:
         total = len(response['recipes'])
         response = response['recipes']
@@ -65,11 +67,9 @@ def search(request):
     else:
         total = 1
 
-
     context = {
         "tag": tag,
         "total": total,
         "response": response,
     }
     return render(request, "main/search.html", context)
-
