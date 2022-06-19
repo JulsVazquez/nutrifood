@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% extends "main/base.html" %}
+{% load static %}
+<style>
+  .container {
+    background-color: #fafbfd;
+    width: 15rem;
+    height: auto;
+    padding: 0.5rem;
+    border-radius: 4px;
+  }
+  i {
+    color: teal;
+    position: absolute;
+  }
+  .textbox {
+    padding: 0 1.3rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  body {
+    padding: 2rem;
+    background-color: #dedede;
+  }
+</style>
+{% block content %}
+<body>
+    {% load crispy_forms_tags %}
+    <div class="view jarallax"
+         data-jarallax='{"speed": 0.2}'
+         style="background-image: url('https://wallpaperaccess.com/full/1737971.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center ">
+        <div id="container">
+            <label></label>
+            <div class="row">
+                <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
+                    <div class="jumbotron" style="background-color: #dfe7ba">
+                        <h1>Information about:</h1>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ ingredient }}</h2>
+                            <h6 class="card-subtitle mb-2 text-muted">Detail</h6>
+                            <div id="container">
+                                <span id="icon"> <i class="material-icons">local_fire_department</i></span>
+                                <span id="text">Calories: {{ response.calories }} kcal</span>
+                            </div>
+                            <div id="container">
+                                <span id="icon"> <i class="material-icons">scale</i></span>
+                                <span id="text">Portion: {{ response.totalWeight|truncatechars:5 }} g</span>
+                            </div>
+                            <div id="container">
+                                <span id="icon"> <i class="material-icons">kebab_dining</i></span>
+                                <span id="text">Fat: {{ response.totalNutrients.FAT.quantity|truncatechars:5 }} {{ response.totalNutrients.FAT.unit }}</span>
+                            </div>
+                            <div id="container">
+                                <span id="icon"> <i class="material-icons">bolt</i></span>
+                            <span id="text">Sugar: {{ response.totalNutrients.SUGAR.quantity|truncatechars:5 }} {{ response.totalNutrients.SUGAR.unit }}</span
+                            >
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
+                <div class="jumbotron" style="background-color: #dfe7ba">
+                    <h1>Search information about your favorite ingredient:</h1>
+                    <div class="inner">
+                        <form method="post">
+                            <div class="inner">
+                                <form method="post">
+                                    <div class="form-groupform-control-lg">
+                                        {% csrf_token %} {{ form|crispy }}
+                                        <input type="submit" value="Search" class="btn btn-success" />
+                                    </div>
+                                </form>
+                            </div>
+                            {% if response %}
+                                {% if response.calories == 0 %}
+                                    <div class="alert alert-warning" role="alert">Ingredient not found try again</div>
+                                {% else %}
+                                    <div class="inner">
+                                        <div class="card position-absolute top-50 start-50 translate-middle"
+                                             style="width: 20rem"></div>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock %}
+</body>

@@ -1,0 +1,69 @@
+{% extends "main/base.html" %}
+{% block content %}
+   <body style="min-height:800px;background-image: url(https://wallpaperaccess.com/full/1189794.jpg); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+      <div class="mask rgba-gradient7">
+         <div class="container h-100 d-flex justify-content-center align-items-center">
+            <!-- Grid row -->
+            <div class="row  pt-5 mt-3">
+               <!-- Grid column -->
+               <div class="col-md-12">
+                  <div class="card" style="background-color: #ffab64">
+                     <div class="card-body" >
+                        <h3>{{query}} {{total}} Result (s) Found.</h3>
+                     </div>
+                  </div>
+               </div>
+               <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+         </div>
+      </div>
+      <div class="jumbotron">
+         <div class="container mt-5">
+            <!--Section: Content-->
+            <section class="">
+               <!-- Grid row -->
+               <div class="row">
+
+
+
+
+                     {% for recipe in response %}
+                  <!-- Grid column -->
+                  <div class="col-lg-4 col-md-12 mb-lg-0 mb-4">
+                     <!-- Card -->
+                     <div class="card hoverable">
+                        <!-- Card image -->
+                        <img class="card-img-top" src="{{recipe.image}}" alt="Card image cap">
+                        <!-- Card content -->
+                        <div class="card-body">
+                           <!-- Title -->
+                           <h5 href="/diets/detail/{{ recipe.id }}" class="text-dark">{{ recipe.title }}</h5>
+                           <!-- Text -->
+                           <p class="card-title text-muted font-small mt-3 mb-2">{{recipe.summary|safe|slice:":150"}}</p>
+                           <a type="button" class="btn btn-flat text-primary p-0 mx-0" href="/diets/detail/{{ recipe.id }}">Read more<i class="fa fa-angle-right ml-2"></i></a>
+                        </div>
+                     </div>
+                     <!-- Card -->
+                  </div>
+                  {% endfor %}
+
+
+                  
+
+
+              
+                 
+               </div>
+               <!-- Grid row -->
+               
+               <div class="text-center mt-5">
+                  <a class="btn" style="background-color: #ffab64" href="{% url 'home' %}">Back Home</a>
+               </div>
+            </section>
+            <!--Section: Content-->
+         </div>
+      </div>
+      <!-- Main Navigation -->
+   </body>
+   {% endblock %}

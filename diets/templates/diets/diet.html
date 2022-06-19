@@ -1,0 +1,36 @@
+{% extends "main/base.html" %}
+{% block head_title %}Todays food{% endblock %}
+{% block content %}
+    <div class="view jarallax"
+         data-jarallax='{"speed": 0.2}'
+         style="background-image: url('https://wallpaperaccess.com/full/1737971.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center ">
+        <div class="container h-100 d-flex justify-content-center align-items-center">
+            <div class="jumbotron" style="padding: 0rem 0rem;">
+                    <!--Section: Content-->
+                    <!-- Grid row -->
+                    <!-- Grid column -->
+                    <div class="col-md-12">
+                        <div class="card  h-10 d-flex justify-content-center"
+                             style="background-color: #ffab64; text-align: center">
+                            <div class="card-body">
+                                <h3>Todays Diet</h3>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Grid column -->
+                <div class="row">
+                    {% for recipe in response.recipes %}
+                        <div class="card" style="width: 18rem;">
+                            <img src="{{ recipe.image }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ recipe.title }}</h5>
+                                <p class="card-text">This is your {{ recipe.tag }}</p>
+                                <a href="/diets/detail/{{ recipe.id }}" class="btn btn-primary">See more</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
