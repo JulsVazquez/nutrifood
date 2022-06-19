@@ -1,8 +1,10 @@
+from tkinter import EXCEPTION
 from django.shortcuts import render, get_object_or_404
 from .models import Recipe
 from django.db.models import Q
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 
+import requests
 
 def home(request):
     total_recipes = Recipe.objects.all().count()
@@ -15,62 +17,59 @@ def home(request):
 
 
 def search(request):
-    recipes = Recipe.objects.all()
-
+    tag = ""
+    search = ""
+    session = requests.Session()
+    session.headers.update({'Content-Type' : 'application/json', 'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'})
     if "search" in request.GET:
-        query = request.GET.get("search")
-        queryset = recipes.filter(Q(title__icontains=query))
+        search = request.GET.get("search")
 
     if request.GET.get("breakfast"):
-        results = queryset.filter(Q(topic__title__icontains="breakfast"))
-        topic = "breakfast"
+        tag = "breakfast"
     elif request.GET.get("appetizers"):
-        results = queryset.filter(Q(topic__title__icontains="appetizers"))
-        topic = "appetizers"
+        tag = "appetizers"
     elif request.GET.get("lunch"):
-        results = queryset.filter(Q(topic__title__icontains="lunch"))
-        topic = "lunch"
+        tag = "lunch"
     elif request.GET.get("salads"):
-        results = queryset.filter(Q(topic__title__icontains="salads"))
-        topic = "salads"
+        tag = "salads"
     elif request.GET.get("dinner"):
-        results = queryset.filter(Q(topic__title__icontains="dinner"))
-        topic = "dinner"
+        tag = "dinner"
     elif request.GET.get("dessert"):
-        results = queryset.filter(Q(topic__title__icontains="dessert"))
-        topic = "dessert"
+        tag = "dessert"
     elif request.GET.get("vegan"):
-        results = queryset.filter(Q(topic__title__icontains="vegan"))
-        topic = "vegan"
+        tag = "vegan"
     elif request.GET.get("vegetarian"):
-        results = queryset.filter(Q(topic__title__icontains="vegetarian"))
-        topic = "vegetarian"
+        tag = "vegetarian"
 
-    total = results.count()
+    response = ""
+    if search and tag:
+        print("s and t")
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4&query={search}&tag={tag}'
+    elif search and not tag:
+        print("s")
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4&query={search}'
+    elif not search and tag:
+        print("t")
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4&tag={tag}'
+    else:
+        print("ninguno")
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=41fec56909474683a86fdcfa31c0f9d7&number=4'
+    print(url)
+    response =  session.get(url=url).json()
+    if 'recipes' in response:
+        total = len(response['recipes'])
+        response = response['recipes']
+    if 'results' in response:
+        total = len(response['results'])
+        response = response['results']
+    else:
+        total = 1
 
-    # paginate results
-    paginator = Paginator(results, 3)
-    page = request.GET.get("page")
-    try:
-        results = paginator.page(page)
-    except PageNotAnInteger:
-        results = paginator.page(1)
-    except EmptyPage:
-        results = paginator.page(paginator.num_pages)
 
     context = {
-        "topic": topic,
-        "page": page,
+        "tag": tag,
         "total": total,
-        "query": query,
-        "results": results,
+        "response": response,
     }
     return render(request, "main/search.html", context)
 
-
-def detail(request, slug):
-    recipe = get_object_or_404(Recipe, slug=slug)
-    context = {
-        "recipe": recipe,
-    }
-    return render(request, "main/detail.html", context)
