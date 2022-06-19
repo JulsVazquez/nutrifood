@@ -22,4 +22,5 @@ urlpatterns = [
     path('', include('main.urls')),
     path('esp/', include('displayapi.urls')),
     path('users/', include('users.urls')),
+    path('diets/', include('diets.urls')),
 ]
