@@ -46,16 +46,16 @@ def search(request):
     response = ""
     if search and tag:
         print("s and t")
-        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4&query={search}&tag={tag}'
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6&query={search}&tag={tag}'
     elif search and not tag:
         print("s")
-        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4&query={search}'
+        url = f'https://api.spoonacular.com/recipes/complexSearch?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6&query={search}'
     elif not search and tag:
         print("t")
-        url = f'https://api.spoonacular.com/recipes/random?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4&tag={tag}'
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6&tag={tag}'
     else:
         print("ninguno")
-        url = f'https://api.spoonacular.com/recipes/random?apiKey=308c4ea0ef67478eace9c54c39a12c43&number=4'
+        url = f'https://api.spoonacular.com/recipes/random?apiKey=717a16dc5e4f4d50b4a5ad4eaf0ca926&number=6'
     print(url)
     response = session.get(url=url).json()
     if 'recipes' in response:
@@ -64,8 +64,8 @@ def search(request):
     if 'results' in response:
         total = len(response['results'])
         response = response['results']
-    else:
-        total = 1
+    # else:
+    #     total = 1
 
     context = {
         "tag": tag,
