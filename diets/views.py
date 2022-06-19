@@ -48,13 +48,14 @@ def detail(request, id):
     url = f'https://api.spoonacular.com/recipes/{id}/information?apiKey=APIKEY'
     for ak in api_keys:
         url = url.replace("APIKEY", ak)
-        response = session.get(url=url).json()
+        response = session.get(url=url)
         if response.status_code == 200:
             break 
         else:
             url = url.replace(ak,"APIKEY")
     if response.status_code != 200:
         return HttpResponseServerError()
+    response = response.json()
     response['protein'] = re.findall(
         r'\d{1,}g of protein', response['summary'])[0].split()[0]
     response['fat'] = re.findall(r'\d{1,}g of fat', response['summary'])[
