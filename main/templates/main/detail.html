@@ -14,10 +14,9 @@
     padding: 10px;
   }
   .center {
-    display: block;
+    display: flex;
     margin-left: auto;
     margin-right: auto;
-    width: 50%;
   }
 </style>
 {% extends "main/base.html" %} {% block content %}
@@ -38,18 +37,18 @@
         <!-- Grid column -->
         <div class="col-md-12 px-lg-8">
           <!-- Card -->
-          <div class="card pb-5 mx-md-6 center">
+          <div class="card pb-12 mx-md-12 center">
             <div class="card-body">
               <div class="container">
                 <!-- Section heading -->
-                <img src="{{response.image}}" style="width: 40%" class="center" />
+                <img src="{{response.image}}" style="width: 30%" class="center" />
                 <h1 class="text-center h1 pt-4 mb-3">
                   <strong style="color: #ffab64">{{response.title}}</strong>
                 </h1>
                 <div class="row">
                   <div class="col-md-12 col-xl-12 d-flex justify-content-center">
                     <div class="d-inline">
-                      <label for="calories">Calories</label>
+                      <label for="calories">Calories </label>
                       <span id="calories" class="border circle">{{response.calories}} cal</span>
                     </div>
 
@@ -148,8 +147,8 @@
 
                         <!-- Google + -->
                       </div>
-                      <div class="text-center mt-5">
-                        <a class="btn" style="background-color: #ffab64" href="{% url 'home' %}">Back Home</a>
+                      <div class="text-center mt-5 center">
+                        <a class="btn center" style="background-color: #ffab64" href="{% url 'home' %}">Back Home</a>
                       </div>
                       <!-- Grid column -->
                     </div>

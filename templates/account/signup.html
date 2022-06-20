@@ -1,0 +1,43 @@
+{% extends "main/base.html" %} {% load i18n %} {% block head_title %} {% trans "Signup" %} {% endblock %} {% block content %}
+<style>
+  .center {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .redondo {
+    border-radius: 25px;
+    margin-top: 20px;
+  }
+</style>
+<div
+  class="view jarallax"
+  data-jarallax='{"speed": 0.2}'
+  style="
+    background-image: url('https://wallpaperaccess.com/full/1737971.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <div class="mask rgba-grey-strong">
+    <div id="container" class="center">
+      <label></label>
+      <div class="row center">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+          <div class="jumbotron redondo" style="background-color: #dfe7ba; align-items: center">
+            <h1>{% trans "Sign Up" %}</h1>
+            <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+            <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+              {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <button type="submit" class="primaryAction btn btn-success btn-block">{% trans "Sign Up" %} &raquo;</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

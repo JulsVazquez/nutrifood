@@ -530,6 +530,7 @@ pre code {
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
+  grid-template-columns: auto auto auto auto;
 }
 .no-gutters {
   margin-right: 0;
