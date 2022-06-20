@@ -161,10 +161,11 @@
         <li class="nav-item">
           <a class="nav-link" href="/esp/">My favorite ingredient </a>
         </li>
-
+        {% if request.user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="/diets/mydiet">Todays Food</a>
         </li>
+        {% endif %}
       </ul>
       {% if request.user.is_authenticated %}
       <a class="btn" style="background-color: #ffab64" href=" /logout/" role="button">Sign out</a>
