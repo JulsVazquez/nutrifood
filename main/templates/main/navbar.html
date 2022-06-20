@@ -166,9 +166,13 @@
           <a class="nav-link" href="/diets/mydiet">Todays Food</a>
         </li>
       </ul>
-
+      {% if request.user.is_authenticated %}
+      <a class="btn" style="background-color: #ffab64" href=" /logout/" role="button">Sign out</a>
+      {% else %}
       <a class="btn" style="background-color: #ffab64" href=" /login/" role="button">Sign in</a>
       <a class="btn" style="background-color: #ffab64" href="/signup/" role="button">Sign up</a>
+      {% endif %}
+      
     </div>
   </nav>
 </div>
