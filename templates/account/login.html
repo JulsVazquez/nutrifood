@@ -1,55 +1,61 @@
-{% extends "main/base.html" %}
-{% load i18n %}
-{% load account socialaccount %}
-{% block head_title %}
-  {% trans "Sign In" %}
-{% endblock %}
+{% extends "main/base.html" %} {% load i18n %} {% load account socialaccount %} {% block head_title %} {% trans "Sign In" %} {% endblock %}
 {% block content %}
-  <div class="view jarallax"
-       data-jarallax='{"speed": 0.2}'
-       style=" background-image: url('https://wallpaperaccess.com/full/1737971.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center; ">
-    <div class="mask rgba-grey-strong">
-      <div id="container">
-        <label></label>
-        <div class="row">
-          <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12 ">
-            <div class="jumbotron" style="background-color: #dfe7ba">
-              <h1>{% trans "Sign In" %}</h1>
-              {% get_providers as socialaccount_providers %}
-              {% if socialaccount_providers %}
-                <p>
-                  {% blocktrans with site.name as site_name %}Please sign in with one
-                  of your existing third party accounts. Or, <a href="{{ signup_url }}">sign up</a>
-                  for a {{ site_name }} account and sign in below:{% endblocktrans %}
-                </p>
-                TEEEEEEEEEEEEEEEEEEEEEEEEST
-                <div class="socialaccount_ballot">
-                  <ul class="socialaccount_providers">
-                    {% include "socialaccount/snippets/provider_list.html" with process="login" %}
-                  </ul>
-                  <div class="login-or">{% trans 'or' %}</div>
-                </div>
-                {% include "socialaccount/snippets/login_extra.html" %}
-              {% else %}
-                <p>
-                  {% blocktrans %}If you have not created an account yet, then please
-                <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
-                </p>
-              {% endif %}
-              <form class="login" method="POST" action="{% url 'account_login' %}">
-                {% csrf_token %}
-                {{ form.as_p }}
-                {% if redirect_field_value %}
-                  <input type="hidden"
-                         name="{{ redirect_field_name }}"
-                         value="{{ redirect_field_value }}"/>
-                {% endif %}
-                <button class="primaryAction btn btn-success" type="submit">{% trans "Sign In" %}</button>
-              </form>
+<style>
+  .center {
+    display: flex;
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+  .redondo {
+    border-radius: 25px;
+    margin-top: 20px;
+  }
+</style>
+<div
+  class="view jarallax"
+  data-jarallax='{"speed": 0.2}'
+  style="
+    background-image: url('https://wallpaperaccess.com/full/1737971.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  "
+>
+  <div class="mask rgba-grey-strong">
+    <div id="container" class="center">
+      <label></label>
+      <div class="row center">
+        <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+          <div class="jumbotron redondo" style="background-color: #dfe7ba">
+            <h1>{% trans "Sign In" %}</h1>
+            {% get_providers as socialaccount_providers %} {% if socialaccount_providers %}
+            <p>
+              {% blocktrans with site.name as site_name %}Please sign in with one of your existing third party accounts. Or,
+              <a href="{{ signup_url }}">sign up</a>
+              for a {{ site_name }} account and sign in below:{% endblocktrans %}
+            </p>
+            TEEEEEEEEEEEEEEEEEEEEEEEEST
+              <ul class="socialaccount_providers">
+                {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+              </ul>
+              <div class="login-or">{% trans 'or' %}</div>
             </div>
+            {% include "socialaccount/snippets/login_extra.html" %} {% else %}
+            <p>
+              {% blocktrans %}If you have not created an account yet, then please
+              <a href="{{ signup_url }}">sign up</a> first.{% endblocktrans %}
+            </p>
+            {% endif %}
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+              {% csrf_token %} {{ form.as_p }} {% if redirect_field_value %}
+              <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+              {% endif %}
+              <button class="primaryAction btn btn-success btn-block" type="submit">{% trans "Sign In" %}</button>
+            </form>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 {% endblock %}

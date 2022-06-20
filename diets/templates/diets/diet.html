@@ -1,36 +1,71 @@
-{% extends "main/base.html" %}
-{% block head_title %}Todays food{% endblock %}
-{% block content %}
-    <div class="view jarallax"
-         data-jarallax='{"speed": 0.2}'
-         style="background-image: url('https://wallpaperaccess.com/full/1737971.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center ">
-        <div class="container h-100 d-flex justify-content-center align-items-center">
-            <div class="jumbotron" style="padding: 0rem 0rem;">
-                    <!--Section: Content-->
-                    <!-- Grid row -->
-                    <!-- Grid column -->
-                    <div class="col-md-12">
-                        <div class="card  h-10 d-flex justify-content-center"
-                             style="background-color: #ffab64; text-align: center">
-                            <div class="card-body">
-                                <h3>Todays Diet</h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Grid column -->
-                <div class="row">
-                    {% for recipe in response.recipes %}
-                        <div class="card" style="width: 18rem;">
-                            <img src="{{ recipe.image }}" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ recipe.title }}</h5>
-                                <p class="card-text">This is your {{ recipe.tag }}</p>
-                                <a href="/diets/detail/{{ recipe.id }}" class="btn btn-primary">See more</a>
-                            </div>
-                        </div>
-                    {% endfor %}
-                </div>
+{% extends "main/base.html" %} {% block head_title %}Todays food{% endblock %} {% block content %}
+<body
+  style="
+    min-height: 800px;
+    background-image: url(https://wallpaperaccess.com/full/1189794.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+  "
+>
+  <div class="mask rgba-grey-strong">
+    <div class="container h-100 d-flex justify-content-center align-items-center">
+      <!-- Grid row -->
+      <div class="row pt-5 mt-3">
+        <!-- Grid column -->
+        <div class="col-md-12">
+          <div class="card" style="background-color: #ffab64">
+            <div class="card-body">
+              <h3>Todays Food.</h3>
             </div>
+          </div>
         </div>
+        <!-- Grid column -->
+      </div>
+      <!-- Grid row -->
     </div>
+  </div>
+  <div class="jumbotron">
+    <div class="container mt-5">
+      <!--Section: Content-->
+      <section class="">
+        <!-- Grid row -->
+        <div class="row">
+          {% for recipe in response.recipes %}
+          <!-- Grid column -->
+          <div class="col-lg-3 col-md-12 mb-lg-6 mb-6">
+            <br />
+            <!-- Card -->
+            <div class="card">
+              <!-- Card image -->
+              <img class="card-img-top" src="{{recipe.image}}" style="width: 100%; height: auto" alt="Card image cap" />
+              <!-- Card content -->
+              <div class="card-body">
+                <!-- Title -->
+                <h5 href="/diets/detail/{{ recipe.id }}" class="text-dark">{{ recipe.title }}</h5>
+                <p class="card-text text-info">This is your {{ recipe.tag }}</p>
+
+                <!-- Text -->
+                <p class="card-title text-muted font-small mt-3 mb-2">{{recipe.summary|safe|slice:":100"}}</p>
+
+                <a type="button" class="btn btn-primary mx-0" href="/diets/detail/{{ recipe.id }}"
+                  >See more<i class="fa fa-angle-right ml-2"></i
+                ></a>
+              </div>
+            </div>
+            <!-- Card -->
+          </div>
+          {% endfor %}
+        </div>
+        <!-- Grid row -->
+
+        <div class="text-center mt-5">
+          <a class="btn" style="background-color: #ffab64" href="{% url 'home' %}">Back Home</a>
+        </div>
+      </section>
+      <!--Section: Content-->
+    </div>
+  </div>
+  <!-- Main Navigation -->
+</body>
 {% endblock %}
