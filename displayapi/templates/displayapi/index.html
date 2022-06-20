@@ -19,6 +19,15 @@
     text-overflow: ellipsis;
     white-space: nowrap;
   }
+  .redondo {
+    border-radius: 25px;
+    margin-top: 20px;
+  }
+  .center {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+  }
   body {
     padding: 2rem;
     background-color: #dedede;
@@ -38,59 +47,58 @@
     "
   >
     <div class="mask rgba-grey-strong">
-      <div id="container">
-        <label></label>
-        <div class="row">
-          <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
-            <div class="jumbotron" style="background-color: #dfe7ba">
-              <h1>Information about:</h1>
-              <div class="card-body">
-                <h2 class="card-title">{{ ingredient }}</h2>
-                <h6 class="card-subtitle mb-2 text-muted">Detail</h6>
-                <div id="container">
-                  <span id="icon"> <i class="material-icons" style="color: #ff1100">local_fire_department</i></span>
-                  <span id="text">Calories: {{ response.calories }} kcal</span>
-                </div>
-                <div id="container">
-                  <span id="icon"> <i class="material-icons" style="color: #003496">scale</i></span>
-                  <span id="text">Portion: {{ response.totalWeight|truncatechars:5 }} g</span>
-                </div>
-                <div id="container">
-                  <span id="icon"> <i class="material-icons" style="color: #964b00">kebab_dining</i></span>
-                  <span id="text"
-                    >Fat: {{ response.totalNutrients.FAT.quantity|truncatechars:5 }} {{ response.totalNutrients.FAT.unit }}</span
-                  >
-                </div>
-                <div id="container">
-                  <span id="icon"> <i class="material-icons" style="color: #ffa600">bolt</i></span>
-                  <span id="text"
-                    >Sugar: {{ response.totalNutrients.SUGAR.quantity|truncatechars:5 }} {{ response.totalNutrients.SUGAR.unit }}</span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6 col-lg-6 col-xl-6 col-sm-12 col-xs-12">
-            <div class="jumbotron" style="background-color: #dfe7ba">
-              <h1>Search information about your favorite ingredient:</h1>
+      <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12">
+        <div class="jumbotron redondo" style="background-color: #dfe7ba">
+          <h1>Search information about your favorite ingredient:</h1>
+          <div class="inner">
+            <form method="post">
               <div class="inner">
                 <form method="post">
-                  <div class="inner">
-                    <form method="post">
-                      <div class="form-groupform-control-lg">
-                        {% csrf_token %} {{ form|crispy }}
-                        <input type="submit" value="Search" class="btn btn-success" />
-                      </div>
-                    </form>
+                  <div class="form-groupform-control-lg">
+                    {% csrf_token %} {{ form|crispy }} <input type="submit" value="Search" class="btn btn-success" />
                   </div>
-                  {% if response %} {% if response.calories == 0 %}
-                  <div class="alert alert-warning" role="alert">Ingredient not found try again</div>
-                  {% else %}
-                  <div class="inner">
-                    <div class="card position-absolute top-50 start-50 translate-middle" style="width: 20rem"></div>
-                  </div>
-                  {% endif %} {% endif %}
                 </form>
+              </div>
+              {% if response %} {% if response.calories == 0 %}
+              <div class="alert alert-warning" role="alert">Ingredient not found try again</div>
+              {% else %}
+              <div class="inner">
+                <div class="card position-absolute top-50 start-50 translate-middle" style="width: 20rem"></div>
+              </div>
+              {% endif %} {% endif %}
+            </form>
+          </div>
+          <div id="container">
+            <label></label>
+            <div class="">
+              <div class="col-md-12 col-lg-12 col-xl-12 col-sm-12 col-xs-12 text-center">
+                <div class="jumbotron redondo" style="background-color: #ffffff">
+                  <h1>Information about:</h1>
+                  <div class="card-body">
+                    <h2 class="card-title">{{ ingredient }}</h2>
+                    <h6 class="card-subtitle mb-2 text-muted">Detail</h6>
+                    <div id="container">
+                      <span id="icon"> <i class="material-icons" style="color: #ff1100">local_fire_department</i></span>
+                      <span id="text">Calories: {{ response.calories }} kcal</span>
+                    </div>
+                    <div id="container">
+                      <span id="icon"> <i class="material-icons" style="color: #003496">scale</i></span>
+                      <span id="text">Portion: {{ response.totalWeight|truncatechars:5 }} g</span>
+                    </div>
+                    <div id="container">
+                      <span id="icon"> <i class="material-icons" style="color: #964b00">kebab_dining</i></span>
+                      <span id="text"
+                        >Fat: {{ response.totalNutrients.FAT.quantity|truncatechars:5 }} {{ response.totalNutrients.FAT.unit }}</span
+                      >
+                    </div>
+                    <div id="container">
+                      <span id="icon"> <i class="material-icons" style="color: #ffa600">bolt</i></span>
+                      <span id="text"
+                        >Sugar: {{ response.totalNutrients.SUGAR.quantity|truncatechars:5 }} {{ response.totalNutrients.SUGAR.unit }}</span
+                      >
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
