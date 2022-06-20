@@ -61,8 +61,8 @@ Y navegue a http://127.0.0.1:8000
 - [x] Plantilla inicial, login
 - [x] Crear,Editar y Leer recetas
 - [ ] Perfil de usuario registrado
-- [ ] Preferencias alimenticias
-- [ ] Crear Dietas y editarlas
+- [x] Preferencias alimenticias
+- [x] Crear Dietas y editarlas
 
 ## Licencia 📄
 
@@ -74,6 +74,10 @@ Este proyecto está bajo la Licencia (MIT License) - mira el archivo [LICENSE](L
 - Invita una cerveza 🍺 o un café ☕ a alguien del equipo.
 - Da las gracias públicamente 🤓.
 - 10/10 al proyecto 💯
+
+## App Design
+![Cover](https://user-images.githubusercontent.com/41756950/174522845-ae514624-53e5-4e2a-b106-ba0fe2cafd78.png)
+
 
 ---
 ⌨️ con ❤️ por [Design Hub](https://github.com/JulsVazquez/nutrifood) 😊
