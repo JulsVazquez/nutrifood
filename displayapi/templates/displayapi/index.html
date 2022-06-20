@@ -1,41 +1,19 @@
 <!DOCTYPE html>
-{% extends "main/base.html" %} {% load static %}
-<style>
-  .container {
-    background-color: #fafbfd;
-    width: 15rem;
-    height: auto;
-    padding: 0.5rem;
-    border-radius: 4px;
-  }
-  i {
-    color: teal;
-    position: absolute;
-  }
-  .textbox {
-    padding: 0 1.3rem;
-    text-align: center;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  .redondo {
-    border-radius: 25px;
-    margin-top: 20px;
-  }
-  .center {
-    display: flex;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  body {
-    padding: 2rem;
-    background-color: #dedede;
-  }
-</style>
-{% block content %}
+{% extends "main/base.html" %} {% load static %} {% block content %}
+
 <body>
   {% load crispy_forms_tags %}
+  <style>
+    .redondo {
+      border-radius: 25px;
+      margin-top: 20px;
+    }
+    .center {
+      display: flex;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
   <div
     class="view jarallax"
     data-jarallax='{"speed": 0.2}'
