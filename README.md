@@ -54,7 +54,6 @@ Y navegue a http://127.0.0.1:8000
 - **Julio Vásquez Alvarez** - _Plantilla inicial, login_ - [JulsVazquez](https://github.com/JulsVazquez)
 - **Victor Hugo Gallegos Mota** - _Crear,Editar y Leer recetas_ - [VictorDeGallegos](https://github.com/VictorDeGallegos)
 - **Cristian Pimentiel Noriega** - _Perfil de usuario registrado, preferencias alimenticias_ - [AngelChristianPimentelNoriega](https://github.com/AngelChristianPimentelNoriega)
-- **Alejandro Noyola Nazario** - _Crear Dietas y editarlas_ - [BlueDevil1164](https://github.com/BlueDevil1164)
 
 ### TO-DO LIST ✅
 
